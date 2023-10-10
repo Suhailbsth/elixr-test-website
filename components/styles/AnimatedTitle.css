@@ -1,0 +1,42 @@
+/* AnimatedTitle.css */
+.letter-container {
+  white-space: pre;
+}
+.letter {
+  opacity: 0;
+  display: inline-block;
+  animation-duration: 0.5s; /* Adjust the duration as needed */
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  transform: translateY(-10px); /* Adjust the initial translateY value */
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+.fade-out {
+  animation-name: fadeOut;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px); /* Adjust the initial translateY value */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Adjust the final translateY value */
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0); /* Adjust the initial translateY value */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px); /* Adjust the final translateY value */
+  }
+}

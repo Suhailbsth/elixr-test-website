@@ -1,0 +1,50 @@
+.option-style {
+  padding: 8px 16px !important; /* Add padding to the options as needed */
+  font-size: 16px; /* Adjust the font size as needed */
+  background-color: #fff; /* Background color for options */
+  color: #333; /* Text color for options */
+}
+
+/* Style for selected option */
+.option-style:checked {
+  background-color: #0074d9; /* Background color for the selected option */
+  color: #fff; /* Text color for the selected option */
+}
+/* Apply styles to the custom dropdown container */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  background-color: #1a202c; /* Dark blue background color */
+  color: white; /* Text color */
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Style the selected option */
+.selected-option {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Style the dropdown options */
+.custom-dropdown-options {
+  display: none;
+  position: absolute;
+  background-color: #1a202c; /* Dark blue background color */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-dropdown-options li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-dropdown-options li:hover {
+  background-color: #2d3748; /* Darker blue background color on hover */
+}
