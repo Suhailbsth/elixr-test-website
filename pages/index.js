@@ -122,8 +122,8 @@ export default function Home({ data, serviceData }) {
   return (
     <main className="flex text-white min-h-screen flex-col items-center  ">
       <div className="px-8 flex w-full min-h-screen flex-col pb-28 md:py-10 md:pb-10 items-center relative overflow-hidden">
-        {/* <Image
-          className="absolute transform md:w-[35vw] scale-x-[-1]"
+        <Image
+          className="absolute block md:hidden transform w-[85vw] mt-16 scale-x-[-1]"
           src="/camera.png"
           alt="camera.png"
           width={500}
@@ -131,10 +131,10 @@ export default function Home({ data, serviceData }) {
           layout="inherit" // Set the layout mode to "responsive"
           objectFit="contain"
           priority
-        /> */}
+        />
         <Canvas
           style={{ position: "absolute", top: "0" }}
-          className="absolute pr-16"
+          className="absolute pr-16 hidden md:block"
         >
           <ThreeDCam />
         </Canvas>
