@@ -47,7 +47,6 @@ const RelatedWorks = ({ data }) => {
                       alt={`Image ${index}`}
                       height={317}
                       quality={100}
-                      unoptimized={true}
                       className={`${
                         ti.imageMode === "port"
                           ? "aspect-3/4 w-[520px] max-w-max"
@@ -83,7 +82,6 @@ const RelatedWorks = ({ data }) => {
                       alt={`Image ${index}`}
                       height={317}
                       quality={100}
-                      unoptimized={true}
                       className={`${
                         ti.imageMode === "port"
                           ? "aspect-3/4 w-[520px] max-w-max"
