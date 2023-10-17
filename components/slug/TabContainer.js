@@ -77,6 +77,7 @@ const TabContainer = ({ data }) => {
                           src={ti.image}
                           alt="image"
                           width={500}
+                          unoptimized={true}
                           height={320}
                           priority
                         />
@@ -128,6 +129,7 @@ const TabContainer = ({ data }) => {
                         alt="image"
                         width={500}
                         height={320}
+                        unoptimized={true}
                         objectFit="cover"
                         priority
                       />

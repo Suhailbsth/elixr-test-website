@@ -8,9 +8,9 @@ const CustomPopup = ({ onClose, selectedItem }) => {
       <div className="relative">
         {selectedItem.type === "image" || selectedItem.type === "behanceUrl" ? (
           <Image
-            className={` object-cover ${
+            className={`object-cover ${
               selectedItem.imageMode && selectedItem.imageMode === "port"
-                ? "aspect-3/4 w-[25vw]"
+                ? "aspect-3/4 h-[80vh] w-full"
                 : "aspect-5/3 w-[60vw]"
             }`}
             src={selectedItem.image}
@@ -18,7 +18,8 @@ const CustomPopup = ({ onClose, selectedItem }) => {
             width={320}
             height={317}
             quality={100}
-            priority
+            unoptimized={true}
+            // Disable the placeholder
           />
         ) : selectedItem.type === "video" ? (
           <div className="aspect-5/3">

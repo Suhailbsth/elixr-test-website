@@ -12,6 +12,7 @@ import GLTFModel from "@/components/GLTFModel";
 import Marquee from "react-fast-marquee";
 import { ThreeDCam } from "@/components/3DCam";
 import { Canvas } from "react-three-fiber";
+import CameraScene from "@/components/GLTFModel";
 
 const companyData = [
   {
@@ -136,6 +137,7 @@ export default function Home({ data, serviceData }) {
           style={{ position: "absolute", top: "0" }}
           className="absolute pr-16 hidden md:block"
         >
+          {/* <CameraScene /> */}
           <ThreeDCam />
         </Canvas>
         <AnimatedTitle titles={data.mainSection.titles} />
@@ -396,6 +398,7 @@ export default function Home({ data, serviceData }) {
             <a
               href={data.aboutSection.videoElement.button.link}
               className="rounded-3xl cursor-pointer self-center py-2 mt-2 border border-white text-2xl w-72 flex text-center items-center justify-center"
+              target="_blank"
             >
               {data.aboutSection.videoElement.button.label}
             </a>
@@ -412,6 +415,7 @@ export default function Home({ data, serviceData }) {
                 {companyData?.map((item, index) => (
                   <Image
                     className=" relative mx-8"
+                    key={index}
                     src={item.image}
                     alt={item.altText}
                     quality={100}

@@ -97,7 +97,7 @@ function Footer({ data }) {
 
               <div className="border-l h-3 border-gray-600"></div>
 
-              <Link className="hover:text-white" href="/privacyPolicy">
+              <Link className="hover:text-white" href="/privacy-Policy">
                 {data?.privacy.label}
               </Link>
             </div>

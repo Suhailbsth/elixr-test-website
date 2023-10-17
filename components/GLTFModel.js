@@ -1,112 +1,41 @@
-import React, { useRef, useEffect } from "react";
-import * as THREE from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import React, { useRef } from "react";
+import { Canvas, useFrame } from "react-three-fiber";
+import { PerspectiveCamera, Html } from "@react-three/drei";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader";
 
-function GLTFModel() {
-  const sceneRef = useRef();
+function CameraScene() {
   const cameraRef = useRef();
-  const rendererRef = useRef();
-  const modelRef = useRef();
-  const previousMousePosition = useRef({ x: 0, y: 0 });
-  let isDragging = false;
+  const mouse = useRef([0, 0]);
 
-  useEffect(() => {
-    // Create a scene
-    const scene = new THREE.Scene();
-    sceneRef.current = scene;
+  useFrame(() => {
+    cameraRef.current.lookAt(mouse.current[0], mouse.current[1], 0);
+  });
 
-    // Create a camera
-    const camera = new THREE.PerspectiveCamera(25, 3 / 5, 0.01, 1000);
-    camera.position.z = 10;
-    cameraRef.current = camera;
+  return (
+    <Canvas>
+      <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 5]} />
 
-    // Create a renderer
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(500, 250);
-    renderer.setClearColor(0x00000000, 0); // Set the clear color to transparent
-    rendererRef.current = renderer;
-    document.getElementById("webgl").appendChild(renderer.domElement);
+      {/* Load your camera model */}
+      <GLTFLoader url="path/to/your/model.gltf">
+        {(gltf) => (
+          <primitive object={gltf.scene} />
+        )}
+      </GLTFLoader>
 
-    // Load the GLTF model
-    const loader = new GLTFLoader();
-
-    loader.load("gltf/Model.gltf", (gltf) => {
-      const model = gltf.scene;
-      modelRef.current = model;
-      scene.add(model);
-
-      console.log("Model loaded:", gltf);
-      // Animation or other manipulations can be performed here if needed
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-      scene.add(ambientLight);
-
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-      directionalLight.position.set(1, 1, 1);
-      scene.add(directionalLight);
-
-      // Mouse sensitivity factor (adjust as needed)
-      const sensitivity = 0.005;
-
-      // Event listener for mouse movement
-      document.addEventListener("mousedown", () => {
-        isDragging = true;
-      });
-
-      document.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
-
-      document.addEventListener("mousemove", (event) => {
-        if (!isDragging) return;
-
-        const { clientX, clientY } = event;
-        const deltaX =
-          (clientX - previousMousePosition.current.x) * sensitivity;
-        const deltaY =
-          (clientY - previousMousePosition.current.y) * sensitivity;
-
-        // Rotate the entire model
-        modelRef.current.rotation.x += deltaY;
-        modelRef.current.rotation.y += deltaX;
-
-        // Rotate the camera as well
-        cameraRef.current.rotation.x += deltaY;
-        cameraRef.current.rotation.y += deltaX;
-
-        previousMousePosition.current.x = clientX;
-        previousMousePosition.current.y = clientY;
-
-        // Render the scene
-        rendererRef.current.render(sceneRef.current, cameraRef.current);
-      });
-
-      // Adjust the camera position as needed
-      camera.position.set(0, 0, 10);
-
-      renderer.setClearColor(0xffffff); // Set to a different color if needed
-
-      // Render the scene
-      renderer.render(scene, camera);
-    });
-
-    // Handle window resizing
-    window.addEventListener("resize", () => {
-      const newWidth = window.innerWidth;
-      const newHeight = window.innerHeight;
-
-      camera.aspect = newWidth / newHeight;
-      camera.updateProjectionMatrix();
-
-      renderer.setSize(newWidth, newHeight);
-    });
-
-    // Clean up the renderer on component unmount
-    return () => {
-      document.getElementById("webgl")?.removeChild(renderer.domElement);
-    };
-  }, []);
-
-  return null; // This component doesn't render anything directly
+      <Html>
+        <div
+          onMouseMove={(e) => {
+            const { clientX, clientY } = e;
+            const x = (clientX / window.innerWidth) * 2 - 1;
+            const y = -(clientY / window.innerHeight) * 2 + 1;
+            mouse.current = [x, y];
+          }}
+        >
+          {/* Content or GUI elements can go here */}
+        </div>
+      </Html>
+    </Canvas>
+  );
 }
 
-export default GLTFModel;
+export default CameraScene;

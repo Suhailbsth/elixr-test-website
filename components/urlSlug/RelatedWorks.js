@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import CustomPopup from "../slug/CustomPopup";
+import { Router } from "next/router";
 
 const RelatedWorks = ({ data }) => {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ const RelatedWorks = ({ data }) => {
       container.scrollBy({ left: 200, behavior: "smooth" }); // Adjust the scroll amount (200 pixels in this example)
     }
   };
-
+  console.log(data);
   const onButtonClick = (item) => {
     setSelectedItem(item);
     setOpen(true);
@@ -30,18 +31,84 @@ const RelatedWorks = ({ data }) => {
         className="flex overflow-x-scroll md:pb-10 pb-1 hide-scroll-bar"
         ref={sectionRef}
       >
-        <div className="flex flex-nowrap gap-5 mt-6">
+        <div className="flex flex-nowrap gap-5 mt-6 w-full">
           {data?.map((ti, index) => (
-            <div className="flex flex-col gap-3" key={index}>
+            <div className="flex flex-col gap-3 w-full" key={index}>
               {ti.image ? (
-                <Image
-                  src={ti.image}
-                  width={320}
-                  alt={`Image ${index}`}
-                  height={317}
-                  quality={100}
-                  className="md:w-130 w-64 md:h-64 h-40 max-w-7xl object-cover overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"
-                />
+                ti.type === "image" || ti.type === "video" ? (
+                  <button
+                    onClick={() => onButtonClick(ti)}
+                    type="button"
+                    className="text-lg flex flex-col gap-4 font-medium"
+                  >
+                    <Image
+                      src={ti.image}
+                      width={320}
+                      alt={`Image ${index}`}
+                      height={317}
+                      quality={100}
+                      unoptimized={true}
+                      className={`${
+                        ti.imageMode === "port"
+                          ? "aspect-3/4 w-[520px] max-w-max"
+                          : "aspect-5/3 md:w-130 w-64 max-w-7xl"
+                      } h-40 md:h-64 rounded-lg shadow-md bg-white transition-shadow duration-300 ease-in-out`}
+                    />
+                    <div className="flex gap-3 items-center w-full">
+                      {ti.name}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                ) : ti.type === "elixrUrl" ? (
+                  <Link
+                    href={`/services/selectedService/${ti.url}`}
+                    className="text-lg flex flex-col gap-4 font-medium"
+                  >
+                    <Image
+                      src={ti.image}
+                      width={320}
+                      alt={`Image ${index}`}
+                      height={317}
+                      quality={100}
+                      unoptimized={true}
+                      className={`${
+                        ti.imageMode === "port"
+                          ? "aspect-3/4 w-[520px] max-w-max"
+                          : "aspect-5/3 md:w-130 w-64 max-w-7xl"
+                      } h-40 md:h-64 rounded-lg shadow-md bg-white transition-shadow duration-300 ease-in-out`}
+                    />
+                    <div className="flex gap-3 items-center w-full">
+                      {ti.name}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                        />
+                      </svg>
+                    </div>
+                  </Link>
+                ) : null
               ) : (
                 <div className="md:w-130 w-64 md:h-64 h-40 max-w-7xl object-cover overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
                   <svg
@@ -60,7 +127,7 @@ const RelatedWorks = ({ data }) => {
                   </svg>
                 </div>
               )}
-              {ti.type === "image" || ti.type === "video" ? (
+              {/* {ti.type === "image" || ti.type === "video" ? (
                 <button
                   onClick={() => onButtonClick(ti)}
                   type="button"
@@ -103,7 +170,7 @@ const RelatedWorks = ({ data }) => {
                     />
                   </svg>
                 </Link>
-              ) : null}
+              ) : null} */}
             </div>
           ))}
         </div>

@@ -39,6 +39,7 @@ const ServicesMenu = ({ data }) => {
                   width={300}
                   height={300}
                   quality={100}
+                  unoptimized={true}
                   alt={o.name}
                   className={` transition-all ease-in-out group-hover:scale-x-100 h-0 scale-x-0 duration-300 group-hover:h-56 w-52 object-cover -rotate-6 ${
                     hoveredItem === o.name ? "static" : "block"
@@ -75,6 +76,7 @@ const ServicesMenu = ({ data }) => {
                   width={300}
                   height={300}
                   quality={100}
+                  unoptimized={true}
                   alt={o.name}
                   className={`w-full h-72 object-cover my-4 ${
                     hoveredItem === o.name ? "md:hidden" : "hidden"

@@ -54,6 +54,7 @@ export async function fetchRelatedData(slug) {
           name,
           "image":image.asset->url,
           category,
+          imageMode,
           type,
           url,
           }
@@ -79,10 +80,13 @@ export async function fetchServiceData(urlSlug) {
       handOver,
       description,
     },
+    cols,
     images[]{
       "src":imageUrl.asset->url,
       type,
-      "url":videoUrl
+      "url":videoUrl,
+      colSpan,
+      rowSpan
     }  
   }`;
 
@@ -110,10 +114,9 @@ function urlSlugPage({ data, relatedData }) {
   const formattedDate =
     date &&
     `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
-    console.log(relatedData,"relatedData")
   return (
     data && (
-      <div className="md:px-20 px-3 font-primary">
+      <div className="md:px-28 px-3 font-primary">
         <h5 className="text-xs text-zinc-500 mt-5">
           <Link
             href={`/services`}
@@ -156,7 +159,7 @@ function urlSlugPage({ data, relatedData }) {
         </div>
         <div className="mx-auto mb-10">
           {data.images && data.images.length > 0 && (
-            <ImageGallery images={data.images} />
+            <ImageGallery images={data.images} cols={data.cols}/>
           )}
         </div>
         {/* <div className="flex flex-wrap gap-5 mb-10">
@@ -184,7 +187,9 @@ function urlSlugPage({ data, relatedData }) {
           </h3>
           {relatedData && (
             <RelatedWorks
-              data={relatedData.tabItems.filter((x) => x.url !== data.slug.current)}
+              data={relatedData.tabItems.filter(
+                (x) => x.url !== data.slug.current
+              )}
             />
           )}
         </div>
