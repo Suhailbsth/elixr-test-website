@@ -175,7 +175,7 @@ export const ImageGallery = ({ images,cols }) => {
       >
         {galleryImages.map((item) => {
           const cols = item.colSpan;
-          const rows = item.rowSpan ? 2 : 1;
+          const rows = item.rowSpan;
 
           return (
             <ImageListItem key={item.src} cols={cols} rows={rows}>
