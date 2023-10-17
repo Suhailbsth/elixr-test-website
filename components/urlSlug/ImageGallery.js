@@ -142,8 +142,8 @@ export const ImageGallery = ({ images,cols }) => {
     console.log(item);
     let img = item;
     if (item.type === "image") {
-      const width = img.scaledWidth;
-      const height = img.scaledHeight;
+      const width = img.height;
+      const height = img.width;
       let mode;
       if (height > width) {
         mode = "port";
