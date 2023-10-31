@@ -64,7 +64,7 @@ export function ThreeDCam(props) {
   //   model.current.lookAt(cursorPosition);
   // });
 
-  useFrame(({ mouse, camera, viewport }, delta) => {
+  useFrame(({ mouse, camera }) => {
     const sensitivity = 80; // Adjust this sensitivity factor
     const x = mouse.x * sensitivity - 1;
     const y = -(mouse.y * 1) + 1;
@@ -75,7 +75,7 @@ export function ThreeDCam(props) {
     // model.current.rotation.set([0, 10, 0])
     // Use lookAt to make the model face the cursor position
     model.current.lookAt(cursorPosition);
-  });
+  });
 
   return (
     <group>
