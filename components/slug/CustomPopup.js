@@ -4,8 +4,8 @@ import VideoPlayer from "../VideoPlayer";
 
 const CustomPopup = ({ onClose, selectedItem }) => {
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center bg-neutral-900 bg-opacity-80">
-      <div className="relative">
+    <div className="fixed inset-0 z-[100] flex justify-center items-center bg-neutral-900 bg-opacity-80">
+      <div className="relative h-fit w-fit">
         {selectedItem.type === "image" || selectedItem.type === "behanceUrl" ? (
           <Image
             className={`object-cover ${
@@ -22,7 +22,7 @@ const CustomPopup = ({ onClose, selectedItem }) => {
             // Disable the placeholder
           />
         ) : selectedItem.type === "video" ? (
-          <div className="aspect-5/3">
+          <div className="aspect-5/3 w-[70vw] h-full">
             <VideoPlayer videoId={selectedItem.url} />
           </div>
         ) : null}

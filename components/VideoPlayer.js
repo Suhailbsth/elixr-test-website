@@ -25,12 +25,16 @@ const VideoPlayer = ({ videoId }) => {
     // };
   }, [videoId]);
 
-  console.log(videoId)
-
   return (
     <div
       data-vjs-player
-      style={{ minWidth: "40vw",height:"40vh", minHeight: "22vw", maxWidth: "100%" }}
+      // className="aspect-video"
+      style={{
+        minWidth: "40vw",
+        width: "100%",
+        height: "100%",
+        minHeight: "22vw",
+      }}
     >
       <video ref={videoRef} className="video-js vjs-default-skin"></video>
     </div>

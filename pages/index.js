@@ -135,7 +135,7 @@ export default function Home({ data, serviceData }) {
         />
         <Canvas
           style={{ position: "absolute", top: "0" }}
-          className="absolute pr-16 hidden md:block"
+          className="absolute hidden md:block"
         >
           {/* <CameraScene /> */}
           <ThreeDCam />

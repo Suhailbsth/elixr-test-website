@@ -33,35 +33,49 @@ export function ThreeDCam(props) {
     setMousePosition({ x: event.clientX, y: event.clientY });
   }
   // Use the useFrame hook to update the camera's position and rotation based on mouse movement
-  //   useFrame(() => {
-  //     // Adjust camera position based on mouse position
-  //     const { x, y } = mousePosition;
-  //     const dx = (x / window.innerWidth - 0.5) * 2;
-  //     const dy = (y / window.innerHeight - 0.5) * 2;
+  // useFrame((camera) => {
+  //   // Adjust camera position based on mouse position
+  //   const { x, y } = mousePosition;
+  //   const dx = (x / window.innerWidth - 0.5) * 2;
+  //   const dy = (y / window.innerHeight - 0.5) * 2;
 
-  //     const newCameraPosition = [
-  //       initialCameraPosition[0] + dx * cameraSensitivity,
-  //       initialCameraPosition[1] + dy * cameraSensitivity,
-  //       initialCameraPosition[2],
-  //     ];
+  //   const newCameraPosition = new Vector3(
+  //     initialCameraPosition[0] + dx * 50,
+  //     -(initialCameraPosition[1] + dy * 50),
+  //     initialCameraPosition[2]
+  //   );
 
-  //     cameraRef.current.position.set(...newCameraPosition);
+  //   // cameraRef.current.position.set(...newCameraPosition);
 
-  //     // Look at the center of the model
-  //     cameraRef.current.lookAt(0, 0, 0);
-  //   });
+  //   // Look at the center of the model
+  //   model.current.lookAt(newCameraPosition);
+  // });
+
+  // useFrame(({ mouse, camera, viewport }, delta) => {
+  //   const sensitivity = 50; // Adjust this sensitivity factor
+  //   const x = mouse.x * sensitivity - 3;
+  //   const y = mouse.y * sensitivity + 3;
+  //   const cursorPosition = new Vector3(x, y, initialCameraPosition[3]);
+
+  //   // Convert the cursor position to world coordinates
+  //   cursorPosition.unproject(camera);
+  //   // model.current.rotation.set([50, 10, 0])
+  //   // Use lookAt to make the model face the cursor position
+  //   model.current.lookAt(cursorPosition);
+  // });
 
   useFrame(({ mouse, camera, viewport }, delta) => {
-    const x = mouse.x * 5 - 1; // Adjust the range of x
-    const y = -(mouse.y * 5) + 1; // Adjust the range of y
+    const sensitivity = 80; // Adjust this sensitivity factor
+    const x = mouse.x * sensitivity - 1;
+    const y = -(mouse.y * 1) + 1;
     const cursorPosition = new Vector3(x, -y, 0);
 
     // Convert the cursor position to world coordinates
     cursorPosition.unproject(camera);
-// model.current.rotation.set([0, 10, 0])
+    // model.current.rotation.set([0, 10, 0])
     // Use lookAt to make the model face the cursor position
     model.current.lookAt(cursorPosition);
-  });
+  });
 
   return (
     <group>
@@ -79,7 +93,7 @@ export function ThreeDCam(props) {
             name="Empty"
             ref={model}
             position={[-0.012, -0.441, 0]}
-            // rotation={[0, 4.7, 0]}
+            rotation={[0, 10, 10]}
             // lookAt={[-10, 5, 10]}
           >
             <mesh
@@ -685,7 +699,7 @@ export function ThreeDCam(props) {
             makeDefault={true}
             far={25}
             near={1}
-            fov={35}
+            fov={38}
             position={initialCameraPosition}
             rotation={[0, 0, 0]} // You can adjust the camera's rotation if needed
           />
